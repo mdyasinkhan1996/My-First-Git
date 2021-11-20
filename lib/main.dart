@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gitone/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +24,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-
   final String title;
 
   @override
@@ -31,7 +31,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final abc = TextEditingController();
 
+
+  @override
+  void dispose() {
+    abc.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +52,27 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Text("khan"),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: TextField(
+                controller: abc,
+                decoration: InputDecoration(
+                    hintText: "anythings",
+                    border: OutlineInputBorder()
+                ),
+              ),
+            ),
+            ElevatedButton(
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context)=>HomePage(abc.text)));
+                },
+                child: Text("HomePage"))
           ],
         ),
-      ),// This trailing comma makes auto-formatting nicer for build methods.
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
